@@ -1,14 +1,12 @@
 
 import { apiClient } from '@/lib/api';
 import { API_ENDPOINTS } from '@/config/api';
+import { ApiResponse} from '@/types/api.types';
+
 import { 
-  ApiResponse, 
   TenantSettings, 
-  TenantBasic, 
-  Vehicle,
-  RentalRequest,
-  RentalRequestResponse 
-} from '@/types';
+  TenantBasic
+} from '@/types/tenant.types';
 
 export const tenantService = {
   /**
@@ -44,7 +42,7 @@ export const tenantService = {
   /**
    * Get tenant vehicles (Future endpoint)
    */
-  async getTenantVehicles(slug: string): Promise<Vehicle[]> {
+ /* async getTenantVehicles(slug: string): Promise<Vehicle[]> {
     try {
       const response = await apiClient.get<ApiResponse<Vehicle[]>>(
         API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
@@ -65,6 +63,8 @@ export const tenantService = {
   /**
    * Submit rental request (Future endpoint)
    */
+  
+  /*
   async submitRentalRequest(slug: string, request: RentalRequest): Promise<RentalRequestResponse> {
     try {
       const response = await apiClient.post<RentalRequestResponse>(
@@ -82,5 +82,5 @@ export const tenantService = {
         request_id: Math.floor(Math.random() * 1000)
       };
     }
-  },
+  },*/
 };
