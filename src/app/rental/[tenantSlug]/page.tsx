@@ -11,21 +11,22 @@ interface TenantHomeProps {
 
 export default async function TenantHomePage({ params }: TenantHomeProps) {
   try {
-    const [tenant, vehicles] = await Promise.all([
-      tenantService.getTenantSettings(params.tenantSlug),
-      tenantService.getTenantVehicles(params.tenantSlug)
+    const { tenantSlug } = params;
+    const [tenant] = await Promise.all([
+      tenantService.getTenantSettings(tenantSlug)
+
     ]);
-const tenantSlug = 'my-rental-company';
+
   const tenantBrandColor = '#1a73e8'; // A hex code for the brand color
     return (
       <div className="space-y-16">
         <TenantHero tenant={tenant} />
          <FeaturedVehicles 
-        tenantSlug={tenant.tenantSlug} 
-        tenantBrandColor={tenant.tenantBrandColor} 
+        tenantSlug={tenant.name} 
+        tenantBrandColor={tenant.brand_color} 
       />
        {/* <ContactPreview tenant={tenant} />*/} 
-        <CallToAction tenant={tenant} tenantSlug={params.tenantSlug} />
+      
       </div>
     );
   } catch (error) {
