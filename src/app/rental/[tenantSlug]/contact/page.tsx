@@ -1,7 +1,7 @@
 
 import { tenantService } from '@/services/tenant.service';
 import { ContactInfo } from '@/components/common/ContactInfo';
-import { ContactForm } from '@/components/rental/ContactForm';
+
 
 interface ContactPageProps {
   params: { tenantSlug: string };
@@ -24,7 +24,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ContactInfo tenant={tenant} />
-          <ContactForm tenantSlug={params.tenantSlug} />
+         {/* <ContactForm tenantSlug={params.tenantSlug} /> */} 
         </div>
       </div>
     );

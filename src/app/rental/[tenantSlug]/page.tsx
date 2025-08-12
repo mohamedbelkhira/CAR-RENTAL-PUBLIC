@@ -20,11 +20,12 @@ export default async function TenantHomePage({ params }: TenantHomeProps) {
   const tenantBrandColor = '#1a73e8'; // A hex code for the brand color
     return (
       <div className="space-y-16">
-        <TenantHero tenant={tenant} />
+        {/* <TenantHero tenant={tenant} />
          <FeaturedVehicles 
         tenantSlug={tenant.name} 
         tenantBrandColor={tenant.brand_color} 
-      />
+      />*/} 
+      HELLO WORLD
        {/* <ContactPreview tenant={tenant} />*/} 
       
       </div>

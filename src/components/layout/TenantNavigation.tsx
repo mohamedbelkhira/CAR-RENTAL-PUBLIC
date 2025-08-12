@@ -19,20 +19,6 @@ export function TenantNavigation({ tenant, tenantSlug }: TenantNavigationProps) 
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="container mx-auto px-4">
-        {/* Top bar with contact info */}
-        <div className="hidden md:flex justify-end items-center py-2 text-sm text-gray-600 border-b border-gray-100">
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-1">
-              <Phone className="h-4 w-4" />
-              <span>Quick Contact</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Mail className="h-4 w-4" />
-              <span>Request Quote</span>
-            </div>
-          </div>
-        </div>
-
         {/* Main navigation */}
         <div className="flex items-center justify-between py-4">
           {/* Logo and brand */}
