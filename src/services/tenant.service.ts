@@ -39,48 +39,5 @@ export const tenantService = {
     return response.data;
   },
 
-  /**
-   * Get tenant vehicles (Future endpoint)
-   */
- /* async getTenantVehicles(slug: string): Promise<Vehicle[]> {
-    try {
-      const response = await apiClient.get<ApiResponse<Vehicle[]>>(
-        API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
-      );
-      
-      if (!response.success) {
-        throw new Error(response.error || 'Failed to fetch vehicles');
-      }
-      
-      return response.data;
-    } catch (error) {
-      // Return mock data for now since endpoint doesn't exist yet
-      console.warn('Vehicles endpoint not implemented yet, returning mock data');
-      return [];
-    }
-  },
-
-  /**
-   * Submit rental request (Future endpoint)
-   */
   
-  /*
-  async submitRentalRequest(slug: string, request: RentalRequest): Promise<RentalRequestResponse> {
-    try {
-      const response = await apiClient.post<RentalRequestResponse>(
-        API_ENDPOINTS.TENANT.CREATE_BOOKING(slug),
-        request
-      );
-      
-      return response;
-    } catch (error) {
-      // Mock response for now since endpoint doesn't exist yet
-      console.warn('Booking endpoint not implemented yet, returning mock response');
-      return {
-        success: true,
-        message: 'Request submitted successfully (mock response)',
-        request_id: Math.floor(Math.random() * 1000)
-      };
-    }
-  },*/
 };

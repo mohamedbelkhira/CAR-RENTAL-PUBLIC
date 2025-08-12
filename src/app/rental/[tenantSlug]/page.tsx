@@ -1,44 +1,70 @@
+// src/app/rental/[tenantSlug]/page.tsx
 
 import { tenantService } from '@/services/tenant.service';
 import { TenantHero } from '@/components/sections/TenantHero';
-import { FeaturedVehicles } from '@/components/sections/FeaturedVehicles';
-//import { ContactPreview } from '@/components/sections/ContactPreview';
-import { CallToAction } from '@/components/sections/CallToAction';
+// import { VehiclesPlaceholder } from '@/components/sections/VehiclesPlaceholder';
 
-interface TenantHomeProps {
+interface TenantStorePageProps {
   params: { tenantSlug: string };
 }
 
-export default async function TenantHomePage({ params }: TenantHomeProps) {
+export default async function TenantStorePage({ params }: TenantStorePageProps) {
   try {
     const { tenantSlug } = params;
-    const [tenant] = await Promise.all([
-      tenantService.getTenantSettings(tenantSlug)
+    const tenant = await tenantService.getTenantSettings(tenantSlug);
 
-    ]);
+    if (!tenant) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+              Magasin introuvable
+            </h1>
+            <p className="text-gray-600">
+              Le magasin que vous recherchez n&apos;existe pas ou n&apos;est plus disponible.
+            </p>
+          </div>
+        </div>
+      );
+    }
 
-  const tenantBrandColor = '#1a73e8'; // A hex code for the brand color
+    if (!tenant.is_active) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+              Magasin temporairement indisponible
+            </h1>
+            <p className="text-gray-600">
+              Ce magasin est actuellement fermé. Veuillez réessayer plus tard.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="space-y-16">
-        {/* <TenantHero tenant={tenant} />
-         <FeaturedVehicles 
-        tenantSlug={tenant.name} 
-        tenantBrandColor={tenant.brand_color} 
-      />*/} 
-      HELLO WORLD
-       {/* <ContactPreview tenant={tenant} />*/} 
-      
+      <div className="min-h-screen">
+        {/* Hero Section with Store Info */}
+        <TenantHero tenant={tenant} />
+        
+        {/* Vehicles Section */}
+        {/* <VehiclesPlaceholder tenantBrandColor={tenant.brand_color} /> */}
       </div>
     );
   } catch (error) {
+    console.error('Error loading tenant store page:', error);
+    
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Unable to Load Agency Information
-        </h1>
-        <p className="text-gray-600">
-          Please try again later or contact support.
-        </p>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Erreur de chargement
+          </h1>
+          <p className="text-gray-600">
+            Impossible de charger les informations du magasin. Veuillez réessayer plus tard.
+          </p>
+        </div>
       </div>
     );
   }
