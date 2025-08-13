@@ -18,7 +18,7 @@ export default async function TenantStorePage({ params }: TenantStorePageProps) 
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
-              Magasin introuvable
+              Magasin introuvable ou non existant
             </h1>
             <p className="text-gray-600">
               Le magasin que vous recherchez n&apos;existe pas ou n&apos;est plus disponible.

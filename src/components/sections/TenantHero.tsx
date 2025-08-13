@@ -22,17 +22,17 @@ export function TenantHero({ tenant }: TenantHeroProps) {
     return `${APP_URL}${imagePath}`;
   };
 
-  // const getTodayOperatingHours = () => {
-  //   const today = new Date().toLocaleDateString('fr-FR', { weekday: 'long' });
-  //   const dayKey = today.charAt(0).toUpperCase() + today.slice(1);
-  //   const todayHours = tenant.operating_hours[dayKey];
+   const getTodayOperatingHours = () => {
+     const today = new Date().toLocaleDateString('fr-FR', { weekday: 'long' });
+     const dayKey = today.charAt(0).toUpperCase() + today.slice(1);
+     const todayHours = tenant.operating_hours[dayKey];
     
-  //   if (!todayHours || !todayHours.is_work_day) {
-  //     return 'Fermé aujourd\'hui';
-  //   }
+     if (!todayHours || !todayHours.is_work_day) {
+       return 'Fermé aujourd\'hui';
+     }
     
-  //   return `Ouvert: ${todayHours.start_time} - ${todayHours.end_time}`;
-  // };
+     return `Ouvert: ${todayHours.start_time} - ${todayHours.end_time}`;
+   };
 
   return (
     <section className="relative">
@@ -98,29 +98,29 @@ export function TenantHero({ tenant }: TenantHeroProps) {
                   <span>{tenant.email}</span>
                 </div>
                 
-                {/* <div className="flex items-center gap-2 text-gray-600">
+                 <div className="flex items-center gap-2 text-gray-600">
                   <Clock className="w-4 h-4" style={{ color: tenant.brand_color }} />
                   <span>{getTodayOperatingHours()}</span>
-                </div> */}
+                </div> 
               </div>
             </div>
 
             {/* Contact Info */}
-            <div className="flex-shrink-0">
+           { /*<div className="flex-shrink-0">
               <div className="text-right">
                 <div className="text-sm text-gray-600 mb-2">Contactez-nous</div>
-                {/* <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1">
                   {tenant.contacts.slice(0, 2).map((contact, index) => (
                     <div key={index} className="text-sm">
                       <span className="font-medium" style={{ color: tenant.brand_color }}>
-                        {contact.label}:
+                        {contact.type}:
                       </span>
                       <span className="text-gray-600 ml-2">{contact.value}</span>
                     </div>
                   ))}
-                </div> */}
+                </div> 
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
