@@ -18,6 +18,7 @@ export function TenantHero({ tenant }: TenantHeroProps) {
     if (!imagePath) return defaultPath;
     // If the path already starts with http, return as is
     if (imagePath.startsWith('http')) return imagePath;
+    console.log("path, ",`${APP_URL}${imagePath}`)
     // Otherwise prepend the APP_URL
     return `${APP_URL}${imagePath}`;
   };
@@ -47,12 +48,10 @@ export function TenantHero({ tenant }: TenantHeroProps) {
         />
         {/* Overlay */}
         <div 
-          className="absolute inset-0 opacity-60"
+          className="absolute inset-0 opacity-20"
           style={{ backgroundColor: tenant.brand_color }}
         />
         
-        {/* Content overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-30" />
       </div>
 
       {/* Store Information */}
