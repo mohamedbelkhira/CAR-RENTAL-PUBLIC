@@ -33,13 +33,15 @@ interface Vehicle {
 }
 
 interface FeaturedVehiclesProps {
+  tenantId: number;
   tenantSlug: string;
   tenantBrandColor: string;
-  vehicles: Vehicle[]; // Real vehicles from API
+  vehicles: Vehicle[];
   baseUrl?: string;
 }
 
 export function FeaturedVehicles({ 
+  tenantId,
   tenantSlug, 
   tenantBrandColor, 
   vehicles, 
@@ -63,6 +65,7 @@ export function FeaturedVehicles({
               key={vehicle.id}
               vehicle={vehicle}
               tenantSlug={tenantSlug}
+              tenantId={tenantId}
               tenantBrandColor={tenantBrandColor}
               baseUrl={baseUrl}
             />

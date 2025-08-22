@@ -4,42 +4,13 @@ import Link from 'next/link';
 import { Car } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-
-interface VehicleImage {
-  id: number;
-  vehicle_id: number;
-  image_path: string;
-  note: string | null;
-  sort_order: number;
-  created_at: string;
-  updated_at: string;
-}
-
-interface Vehicle {
-  id: number;
-  tenant_id: number;
-  brand: string;
-  model: string;
-  year: string;
-  category: string;
-  transmission: string;
-  daily_rate: string;
-  license_plate: string;
-  vin_number: string;
-  fuel_type: string;
-  current_mileage: number;
-  color: string;
-  seats: number;
-  description: string;
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-  images: VehicleImage[];
-}
+import { VehicleImage } from '@/types/tenant.types';
+import { Vehicle } from '@/types/tenant.types';
 
 interface VehicleCardProps {
   vehicle: Vehicle;
   tenantSlug: string;
+  tenantId: number;
   tenantBrandColor: string;
   baseUrl?: string; // For constructing full image URLs
 }

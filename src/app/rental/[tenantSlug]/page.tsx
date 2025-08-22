@@ -4,6 +4,7 @@ import { tenantService } from '@/services/tenant.service';
 import { TenantHero } from '@/components/sections/TenantHero';
 import { FeaturedVehicles } from '@/components/sections/FeaturedVehicles';
 // import { VehiclesPlaceholder } from '@/components/sections/VehiclesPlaceholder';
+import { VehicleProvider } from '@/contexte/VehicleContext';
 
 interface TenantStorePageProps {
   params: { tenantSlug: string };
@@ -51,9 +52,10 @@ export default async function TenantStorePage({ params }: TenantStorePageProps) 
         <TenantHero tenant={tenant} />
         
         {/* Featured Vehicles Section */}
-        <FeaturedVehicles tenantSlug={tenantSlug} tenantBrandColor={tenant.brand_color} vehicles={vehicles}/>
+         <VehicleProvider vehicles={vehicles}>
+        <FeaturedVehicles tenantId ={tenant.id} tenantSlug={tenantSlug} tenantBrandColor={tenant.brand_color} vehicles={vehicles}/>
         
-     
+        </VehicleProvider>  
       </div>
     );
   } catch (error) {
