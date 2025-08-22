@@ -5,7 +5,9 @@ import { ApiResponse} from '@/types/api.types';
 
 import { 
   TenantSettings, 
-  TenantBasic
+  TenantBasic, 
+  Vehicle,
+  VehicleImage
 } from '@/types/tenant.types';
 
 export const tenantService = {
@@ -39,5 +41,15 @@ export const tenantService = {
     return response.data;
   },
 
-  
+  async getTenantVehicles(slug: string): Promise<Vehicle[]> {
+    const response = await apiClient.get<ApiResponse<Vehicle[]>>(
+      API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
+    );
+    
+    if (!response.success) {
+      throw new Error(response.error || 'Failed to fetch tenant vehicles');
+    }
+    
+    return response.data;
+  },
 };

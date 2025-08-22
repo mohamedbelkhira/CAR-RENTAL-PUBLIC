@@ -64,3 +64,41 @@ export interface TenantBasic {
   profile_image: string | null;
   is_active: boolean;
 }
+export interface VehicleImage {
+  id: number;
+  vehicle_id: number;
+  image_path: string;
+  note: string | null;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Vehicle {
+  id: number;
+  tenant_id: number;
+  brand: string;
+  model: string;
+  year: string;
+  category: string;
+  transmission: string;
+  daily_rate: string;
+  license_plate: string;
+  vin_number: string;
+  fuel_type: string;
+  current_mileage: number;
+  color: string;
+  seats: number;
+  description: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  images: VehicleImage[];
+}
+
+export interface FeaturedVehiclesProps {
+  tenantSlug: string;
+  tenantBrandColor: string;
+  vehicles: Vehicle[]; // Real vehicles from API
+  baseUrl?: string;
+}

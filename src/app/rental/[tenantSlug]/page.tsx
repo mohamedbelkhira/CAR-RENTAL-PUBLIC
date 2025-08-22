@@ -2,6 +2,7 @@
 
 import { tenantService } from '@/services/tenant.service';
 import { TenantHero } from '@/components/sections/TenantHero';
+import { FeaturedVehicles } from '@/components/sections/FeaturedVehicles';
 // import { VehiclesPlaceholder } from '@/components/sections/VehiclesPlaceholder';
 
 interface TenantStorePageProps {
@@ -12,6 +13,7 @@ export default async function TenantStorePage({ params }: TenantStorePageProps) 
   try {
     const { tenantSlug } = params;
     const tenant = await tenantService.getTenantSettings(tenantSlug);
+    const vehicles = await tenantService.getTenantVehicles(tenantSlug);
 
     if (!tenant) {
       return (
@@ -48,8 +50,10 @@ export default async function TenantStorePage({ params }: TenantStorePageProps) 
         {/* Hero Section with Store Info */}
         <TenantHero tenant={tenant} />
         
-        {/* Vehicles Section */}
-        {/* <VehiclesPlaceholder tenantBrandColor={tenant.brand_color} /> */}
+        {/* Featured Vehicles Section */}
+        <FeaturedVehicles tenantSlug={tenantSlug} tenantBrandColor={tenant.brand_color} vehicles={vehicles}/>
+        
+     
       </div>
     );
   } catch (error) {

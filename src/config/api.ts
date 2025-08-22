@@ -12,7 +12,7 @@ export const API_ENDPOINTS = {
   TENANT: {
     GET_SETTINGS: (slug: string) => `/tenants/${slug}/settings`,
     GET_BASIC: (slug: string) => `/tenants/${slug}/basic`,
-    GET_VEHICLES: (slug: string) => `/tenant/${slug}/vehicles`, 
+    GET_VEHICLES: (slug: string) => `/tenants/${slug}/vehicles`, 
     GET_AVAILABILITY: (slug: string) => `/tenant/${slug}/availability`, 
     CREATE_BOOKING: (slug: string) => `/tenant/${slug}/bookings`, 
   },
