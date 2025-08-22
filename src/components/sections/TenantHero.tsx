@@ -9,7 +9,7 @@ interface TenantHeroProps {
 }
 
 export function TenantHero({ tenant }: TenantHeroProps) {
-  const APP_URL = 'http://127.0.0.1:8000';
+  const APP_URL = 'http://srv673142.hstgr.cloud';
   const defaultBannerImage = '/images/default-banner.jpg';
   const defaultProfileImage = '/images/default-logo.png';
 
