@@ -150,7 +150,7 @@ export function VehicleCard({
           className="w-full h-11 text-white font-semibold shadow-md hover:shadow-lg transition-all duration-200"
           style={{ backgroundColor: tenantBrandColor }}
         >
-          <Link href={`/rental/${tenantSlug}/vehicles/${vehicle.id}`}>
+          <Link href={`/tenants/${tenantSlug}/vehicles/${vehicle.id}`}>
             Détails / Réservation
           </Link>
         </Button>

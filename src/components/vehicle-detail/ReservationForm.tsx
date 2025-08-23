@@ -203,7 +203,7 @@ export function ReservationForm({
                     setCustomerName(e.target.value);
                     clearErrors('customer_name');
                   }}
-                  placeholder="Ex: Jean Dupont"
+                  placeholder="Ex: SALIMI Mohamed"
                   className={`h-11 ${errors.customer_name ? 'border-red-300 focus-visible:ring-red-500' : 'focus-visible:ring-slate-400'}`}
                 />
                 {errors.customer_name && (
@@ -225,7 +225,7 @@ export function ReservationForm({
                       setCustomerPhone(e.target.value);
                       clearErrors('customer_phone');
                     }}
-                    placeholder="Ex: +213 555 123 456"
+                    placeholder="Ex: 0555 123 456"
                     className={`h-11 pl-10 ${errors.customer_phone ? 'border-red-300 focus-visible:ring-red-500' : 'focus-visible:ring-slate-400'}`}
                   />
                 </div>
