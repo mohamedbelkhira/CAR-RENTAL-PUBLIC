@@ -9,10 +9,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
+import { CheckCircle, AlertCircle, Loader2, Calendar, Phone, User, MessageSquare, CreditCard } from 'lucide-react';
 import { ReservationFormProps } from '@/types/reservation.types';
 import { BookingResponse } from '@/types/reservation.types';
-
 
 export function ReservationForm({ 
   tenantBrandColor, 
@@ -113,7 +113,6 @@ export function ReservationForm({
         customer_notes: customerNotes.trim() || undefined,
       };
 
-      console.log("request.body", requestBody)
       const response = await fetch(`${baseUrl}/api/bookings`, {
         method: 'POST',
         headers: {
@@ -153,21 +152,21 @@ export function ReservationForm({
   };
 
   return (
-    <Card className="shadow-sm">
-      <CardHeader>
-        <CardTitle className="text-xl">Réserver ce véhicule</CardTitle>
-        <CardDescription>
-          Remplissez les informations ci-dessous pour soumettre votre demande de réservation
+    <Card className="border-0 shadow-xl bg-white/95 backdrop-blur-sm">
+      <CardHeader className="pb-6">
+        <CardTitle className="text-2xl font-bold">Réserver ce véhicule</CardTitle>
+        <CardDescription className="text-base">
+          Remplissez le formulaire pour soumettre votre demande de réservation
         </CardDescription>
       </CardHeader>
       
-      <CardContent className="space-y-6">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-8">
           {/* Success Message */}
           {successMessage && (
-            <Alert className="border-green-200 bg-green-50">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <AlertDescription className="text-green-800">
+            <Alert className="border-green-200 bg-green-50/80 backdrop-blur-sm">
+              <CheckCircle className="h-5 w-5 text-green-600" />
+              <AlertDescription className="text-green-800 font-medium">
                 {successMessage}
               </AlertDescription>
             </Alert>
@@ -175,28 +174,26 @@ export function ReservationForm({
 
           {/* General Error Messages */}
           {errors.general && (
-            <Alert variant="destructive">
-              <AlertCircle className="h-4 w-4" />
+            <Alert variant="destructive" className="bg-red-50/80 backdrop-blur-sm">
+              <AlertCircle className="h-5 w-5" />
               <AlertDescription>
                 {errors.general.map((error, index) => (
-                  <div key={index}>{error}</div>
+                  <div key={index} className="font-medium">{error}</div>
                 ))}
               </AlertDescription>
             </Alert>
           )}
 
-          {/* Customer Information */}
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold">Informations du client</h3>
-              <p className="text-sm text-muted-foreground">
-                Vos coordonnées pour la réservation
-              </p>
+          {/* Customer Information Section */}
+          <div className="space-y-6">
+            <div className="flex items-center space-x-2">
+              <User className="h-5 w-5 text-slate-600" />
+              <h3 className="text-lg font-semibold">Informations personnelles</h3>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="customer-name">
+                <Label htmlFor="customer-name" className="text-sm font-medium">
                   Nom complet <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -207,71 +204,74 @@ export function ReservationForm({
                     clearErrors('customer_name');
                   }}
                   placeholder="Ex: Jean Dupont"
-                  className={errors.customer_name ? 'border-red-300 focus-visible:ring-red-500' : ''}
+                  className={`h-11 ${errors.customer_name ? 'border-red-300 focus-visible:ring-red-500' : 'focus-visible:ring-slate-400'}`}
                 />
                 {errors.customer_name && (
-                  <p className="text-sm text-red-600">{errors.customer_name[0]}</p>
+                  <p className="text-sm text-red-600 font-medium">{errors.customer_name[0]}</p>
                 )}
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="customer-phone">
+                <Label htmlFor="customer-phone" className="text-sm font-medium">
                   Numéro de téléphone <span className="text-red-500">*</span>
                 </Label>
-                <Input
-                  id="customer-phone"
-                  type="tel"
-                  value={customerPhone}
-                  onChange={(e) => {
-                    setCustomerPhone(e.target.value);
-                    clearErrors('customer_phone');
-                  }}
-                  placeholder="Ex: +213 555 123 456"
-                  className={errors.customer_phone ? 'border-red-300 focus-visible:ring-red-500' : ''}
-                />
+                <div className="relative">
+                  <Phone className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
+                  <Input
+                    id="customer-phone"
+                    type="tel"
+                    value={customerPhone}
+                    onChange={(e) => {
+                      setCustomerPhone(e.target.value);
+                      clearErrors('customer_phone');
+                    }}
+                    placeholder="Ex: +213 555 123 456"
+                    className={`h-11 pl-10 ${errors.customer_phone ? 'border-red-300 focus-visible:ring-red-500' : 'focus-visible:ring-slate-400'}`}
+                  />
+                </div>
                 {errors.customer_phone && (
-                  <p className="text-sm text-red-600">{errors.customer_phone[0]}</p>
+                  <p className="text-sm text-red-600 font-medium">{errors.customer_phone[0]}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="customer-type" className="text-sm font-medium">
+                  Type de client <span className="text-red-500">*</span>
+                </Label>
+                <Select 
+                  value={customerType} 
+                  onValueChange={(value: 'person' | 'company') => {
+                    setCustomerType(value);
+                    clearErrors('customer_type');
+                  }}
+                >
+                  <SelectTrigger className={`h-11 ${errors.customer_type ? 'border-red-300 focus:ring-red-500' : 'focus:ring-slate-400'}`}>
+                    <SelectValue placeholder="Sélectionnez le type de client" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="person">Particulier</SelectItem>
+                    <SelectItem value="company">Entreprise</SelectItem>
+                  </SelectContent>
+                </Select>
+                {errors.customer_type && (
+                  <p className="text-sm text-red-600 font-medium">{errors.customer_type[0]}</p>
                 )}
               </div>
             </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="customer-type">
-                Type de client <span className="text-red-500">*</span>
-              </Label>
-              <Select 
-                value={customerType} 
-                onValueChange={(value: 'person' | 'company') => {
-                  setCustomerType(value);
-                  clearErrors('customer_type');
-                }}
-              >
-                <SelectTrigger className={errors.customer_type ? 'border-red-300 focus:ring-red-500' : ''}>
-                  <SelectValue placeholder="Sélectionnez le type de client" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="person">Particulier</SelectItem>
-                  <SelectItem value="company">Entreprise</SelectItem>
-                </SelectContent>
-              </Select>
-              {errors.customer_type && (
-                <p className="text-sm text-red-600">{errors.customer_type[0]}</p>
-              )}
-            </div>
           </div>
 
-          {/* Date Selection */}
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="text-lg font-semibold">Dates de location</h3>
-              <p className="text-sm text-muted-foreground">
-                Choisissez vos dates de début et de fin de location
-              </p>
+          <Separator />
+
+          {/* Date Selection Section */}
+          <div className="space-y-6">
+            <div className="flex items-center space-x-2">
+              <Calendar className="h-5 w-5 text-slate-600" />
+              <h3 className="text-lg font-semibold">Période de location</h3>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="start-date">
+                <Label htmlFor="start-date" className="text-sm font-medium">
                   Date de début <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -280,15 +280,15 @@ export function ReservationForm({
                   value={startDate}
                   min={today}
                   onChange={(e) => handleDateChange(e.target.value, endDate)}
-                  className={errors.requested_start_date ? 'border-red-300 focus-visible:ring-red-500' : ''}
+                  className={`h-11 ${errors.requested_start_date ? 'border-red-300 focus-visible:ring-red-500' : 'focus-visible:ring-slate-400'}`}
                 />
                 {errors.requested_start_date && (
-                  <p className="text-sm text-red-600">{errors.requested_start_date[0]}</p>
+                  <p className="text-sm text-red-600 font-medium">{errors.requested_start_date[0]}</p>
                 )}
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="end-date">
+                <Label htmlFor="end-date" className="text-sm font-medium">
                   Date de fin <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -297,71 +297,97 @@ export function ReservationForm({
                   value={endDate}
                   min={startDate || today}
                   onChange={(e) => handleDateChange(startDate, e.target.value)}
-                  className={errors.requested_end_date ? 'border-red-300 focus-visible:ring-red-500' : ''}
+                  className={`h-11 ${errors.requested_end_date ? 'border-red-300 focus-visible:ring-red-500' : 'focus-visible:ring-slate-400'}`}
                 />
                 {errors.requested_end_date && (
-                  <p className="text-sm text-red-600">{errors.requested_end_date[0]}</p>
+                  <p className="text-sm text-red-600 font-medium">{errors.requested_end_date[0]}</p>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Notes */}
-          <div className="space-y-2">
-            <Label htmlFor="customer-notes">Notes supplémentaires</Label>
-            <Textarea
-              id="customer-notes"
-              value={customerNotes}
-              onChange={(e) => setCustomerNotes(e.target.value)}
-              placeholder="Toute demande spéciale ou information supplémentaire..."
-              className="min-h-[80px]"
-            />
-            <p className="text-sm text-muted-foreground">
-              Optionnel - Ajoutez toute information utile pour votre réservation
-            </p>
+          <Separator />
+
+          {/* Notes Section */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <MessageSquare className="h-5 w-5 text-slate-600" />
+              <h3 className="text-lg font-semibold">Notes supplémentaires</h3>
+            </div>
+            <div className="space-y-2">
+              <Textarea
+                id="customer-notes"
+                value={customerNotes}
+                onChange={(e) => setCustomerNotes(e.target.value)}
+                placeholder="Toute demande spéciale ou information supplémentaire..."
+                className="min-h-[100px] focus-visible:ring-slate-400"
+              />
+              <p className="text-sm text-slate-500">
+                Optionnel - Ajoutez toute information utile pour votre réservation
+              </p>
+            </div>
           </div>
           
           {/* Price Summary */}
           {totalPrice > 0 && (
-            <Card className="bg-muted/50">
-              <CardContent className="p-4">
-                <div className="text-center space-y-2">
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="text-sm text-muted-foreground">Durée:</span>
-                    <Badge variant="secondary">
-                      {totalDays} jour{totalDays > 1 ? 's' : ''}
-                    </Badge>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Prix total estimé</p>
-                    <p className="text-3xl font-bold" style={{ color: tenantBrandColor }}>
+            <div className="bg-gradient-to-r from-slate-50 to-slate-100 rounded-xl p-6 border border-slate-200">
+              <div className="flex items-center space-x-2 mb-4">
+                <CreditCard className="h-5 w-5 text-slate-600" />
+                <h3 className="text-lg font-semibold">Résumé de la réservation</h3>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-600">Durée de location</span>
+                  <Badge variant="secondary" className="bg-white">
+                    {totalDays} jour{totalDays > 1 ? 's' : ''}
+                  </Badge>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-600">Tarif journalier</span>
+                  <span className="font-semibold">
+                    {new Intl.NumberFormat('fr-DZ').format(dailyRate)} DA
+                  </span>
+                </div>
+                
+                <Separator />
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold text-slate-900">Total estimé</span>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold" style={{ color: tenantBrandColor }}>
                       {new Intl.NumberFormat('fr-DZ').format(totalPrice)} DA
-                    </p>
-                    <p className="text-xs text-muted-foreground">
+                    </div>
+                    <p className="text-xs text-slate-500">
                       {new Intl.NumberFormat('fr-DZ').format(dailyRate)} DA × {totalDays} jour{totalDays > 1 ? 's' : ''}
                     </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
 
           {/* Submit Button */}
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full h-12 text-white font-semibold"
+            className="w-full h-12 text-white font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-200"
             style={{ backgroundColor: tenantBrandColor }}
           >
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 Envoi en cours...
               </>
             ) : (
               'Envoyer la demande de réservation'
             )}
           </Button>
+          
+          <p className="text-xs text-slate-500 text-center mt-4">
+            En soumettant cette demande, vous acceptez d'être contacté pour finaliser votre réservation.
+          </p>
         </form>
       </CardContent>
     </Card>
