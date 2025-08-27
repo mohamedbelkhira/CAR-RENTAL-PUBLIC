@@ -43,11 +43,11 @@ export function TenantHero({ tenant }: TenantHeroProps) {
   const operatingHours = getTodayOperatingHours();
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden pb-16">
       {/* Banner Section */}
       <div className="relative h-[400px] lg:h-[500px]">
        
-          // When there's a custom image, show it without overlay
+         
           <Image
             src={getImageUrl(tenant.banner_image, defaultBannerImage)}
             alt={`${tenant.name} banner`}
@@ -138,56 +138,62 @@ export function TenantHero({ tenant }: TenantHeroProps) {
                 {/* Contact Information */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                   
-                  {/* Location */}
-                  <div className="flex items-start gap-3 group">
-                    <div 
-                      className="p-2 rounded-lg mt-0.5 group-hover:scale-110 transition-transform"
-                      style={{ backgroundColor: `${tenant.brand_color}15` }}
-                    >
-                      <MapPin 
-                        className="w-5 h-5" 
-                        style={{ color: tenant.brand_color }} 
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-slate-900 text-sm">Adresse</p>
-                      <p className="text-slate-600 text-sm leading-relaxed">{tenant.address}</p>
-                    </div>
-                  </div>
-                  
-                  {/* Phone */}
-                  <div className="flex items-start gap-3 group">
-                    <div 
-                      className="p-2 rounded-lg mt-0.5 group-hover:scale-110 transition-transform"
-                      style={{ backgroundColor: `${tenant.brand_color}15` }}
-                    >
-                      <Phone 
-                        className="w-5 h-5" 
-                        style={{ color: tenant.brand_color }} 
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-slate-900 text-sm">Téléphone</p>
-                      <p className="text-slate-600 text-sm">{tenant.phone}</p>
-                    </div>
-                  </div>
-                  
-                  {/* Email */}
-                  <div className="flex items-start gap-3 group">
-                    <div 
-                      className="p-2 rounded-lg mt-0.5 group-hover:scale-110 transition-transform"
-                      style={{ backgroundColor: `${tenant.brand_color}15` }}
-                    >
-                      <Mail 
-                        className="w-5 h-5" 
-                        style={{ color: tenant.brand_color }} 
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-slate-900 text-sm">Email</p>
-                      <p className="text-slate-600 text-sm break-all">{tenant.email}</p>
-                    </div>
-                  </div>
+                 {/* Location */}
+{tenant.address && (
+  <div className="flex items-start gap-3 group">
+    <div 
+      className="p-2 rounded-lg mt-0.5 group-hover:scale-110 transition-transform"
+      style={{ backgroundColor: `${tenant.brand_color}15` }}
+    >
+      <MapPin 
+        className="w-5 h-5" 
+        style={{ color: tenant.brand_color }} 
+      />
+    </div>
+    <div className="flex-1">
+      <p className="font-semibold text-slate-900 text-sm">Adresse</p>
+      <p className="text-slate-600 text-sm leading-relaxed">{tenant.address}</p>
+    </div>
+  </div>
+)}
+
+{/* Phone */}
+{tenant.phone && (
+  <div className="flex items-start gap-3 group">
+    <div 
+      className="p-2 rounded-lg mt-0.5 group-hover:scale-110 transition-transform"
+      style={{ backgroundColor: `${tenant.brand_color}15` }}
+    >
+      <Phone 
+        className="w-5 h-5" 
+        style={{ color: tenant.brand_color }} 
+      />
+    </div>
+    <div className="flex-1">
+      <p className="font-semibold text-slate-900 text-sm">Téléphone</p>
+      <p className="text-slate-600 text-sm">{tenant.phone}</p>
+    </div>
+  </div>
+)}
+
+{/* Email */}
+{tenant.email && (
+  <div className="flex items-start gap-3 group">
+    <div 
+      className="p-2 rounded-lg mt-0.5 group-hover:scale-110 transition-transform"
+      style={{ backgroundColor: `${tenant.brand_color}15` }}
+    >
+      <Mail 
+        className="w-5 h-5" 
+        style={{ color: tenant.brand_color }} 
+      />
+    </div>
+    <div className="flex-1">
+      <p className="font-semibold text-slate-900 text-sm">Email</p>
+      <p className="text-slate-600 text-sm break-all">{tenant.email}</p>
+    </div>
+  </div>
+)}
                   
                   {/* Operating Hours */}
                   <div className="flex items-start gap-3 group">

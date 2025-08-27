@@ -52,7 +52,7 @@ export function VehicleDetailPage({
       <div className="bg-white/80 backdrop-blur-sm border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <Button variant="ghost" asChild className="hover:bg-slate-100">
-            <Link href={`/rental/${tenantSlug}`} className="inline-flex items-center">
+            <Link href={`/tenants/${tenantSlug}`} className="inline-flex items-center">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Retour aux véhicules
             </Link>

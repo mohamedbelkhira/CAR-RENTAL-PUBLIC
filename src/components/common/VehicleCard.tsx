@@ -48,8 +48,8 @@ export function VehicleCard({
 
   // Get the first image or use placeholder
   const primaryImage = vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : null;
-  const imageUrl = primaryImage ? `${baseUrl}${primaryImage.image_path}` : null;
-
+  //const imageUrl = primaryImage ? `${baseUrl}${primaryImage.image_path}` : null;
+const imageUrl = primaryImage ? `${baseUrl}/storage/${primaryImage.image_path}` : null;
   const specs = [
     { icon: Settings, value: capitalize(vehicle.transmission) },
     { icon: Fuel, value: `${vehicle.fuel_type} ` },

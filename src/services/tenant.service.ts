@@ -41,7 +41,7 @@ export const tenantService = {
     return response.data;
   },
 
-  async getTenantVehicles(slug: string): Promise<Vehicle[]> {
+  /*async getTenantVehicles(slug: string): Promise<Vehicle[]> {
     const response = await apiClient.get<ApiResponse<Vehicle[]>>(
       API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
     );
@@ -51,5 +51,14 @@ export const tenantService = {
     }
     
     return response.data;
+  },*/
+
+    async getTenantVehicles(slug: string): Promise<Vehicle[]> {
+    const response = await apiClient.get<Vehicle[]>(
+    API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
+  );
+  
+  // Since the API returns the array directly, just return it
+  return response;
   },
 };

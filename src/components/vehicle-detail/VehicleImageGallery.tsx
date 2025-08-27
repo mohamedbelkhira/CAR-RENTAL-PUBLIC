@@ -43,7 +43,7 @@ export function VehicleImageGallery({
         {hasValidImages ? (
           <>
             <Image
-              src={`${baseUrl}${validImages[currentImageIndex].image_path}`}
+              src={`${baseUrl}/storage/${validImages[currentImageIndex].image_path}`}
               alt={vehicleName}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -64,7 +64,7 @@ export function VehicleImageGallery({
               <DialogContent className="max-w-4xl w-full h-[90vh] p-0">
                 <div className="relative h-full w-full bg-black rounded-lg overflow-hidden">
                   <Image
-                    src={`${baseUrl}${validImages[currentImageIndex].image_path}`}
+                    src={`${baseUrl}/storage/${validImages[currentImageIndex].image_path}`}
                     alt={vehicleName}
                     fill
                     className="object-contain"
@@ -140,7 +140,7 @@ export function VehicleImageGallery({
               }`}
             >
               <Image
-                src={`${baseUrl}${image.image_path}`}
+                src={`${baseUrl}/storage/${image.image_path}`}
                 alt={`${vehicleName} - Vue ${index + 1}`}
                 fill
                 className="object-cover"
