@@ -3,7 +3,6 @@
 import { tenantService } from '@/services/tenant.service';
 import { TenantHero } from '@/components/sections/TenantHero';
 import { FeaturedVehicles } from '@/components/sections/FeaturedVehicles';
-// import { VehiclesPlaceholder } from '@/components/sections/VehiclesPlaceholder';
 import { VehicleProvider } from '@/contexte/VehicleContext';
 
 interface TenantStorePageProps {
@@ -14,7 +13,8 @@ export default async function TenantStorePage({ params }: TenantStorePageProps) 
   try {
     const { tenantSlug } = params;
     const tenant = await tenantService.getTenantSettings(tenantSlug);
-    const vehicles = await tenantService.getTenantVehicles(tenantSlug);
+    // Use the availability endpoint without date filters to get all vehicles initially
+    const vehicles = await tenantService.getTenantVehiclesAvailability(tenantSlug);
 
     if (!tenant) {
       return (
@@ -51,10 +51,14 @@ export default async function TenantStorePage({ params }: TenantStorePageProps) 
         {/* Hero Section with Store Info */}
         <TenantHero tenant={tenant} />
         
-        {/* Featured Vehicles Section */}
-         <VehicleProvider vehicles={vehicles}>
-        <FeaturedVehicles tenantId ={tenant.id} tenantSlug={tenantSlug} tenantBrandColor={tenant.brand_color} vehicles={vehicles}/>
-        
+        {/* Featured Vehicles Section with Filtering */}
+        <VehicleProvider vehicles={vehicles}>
+          <FeaturedVehicles 
+            tenantId={tenant.id} 
+            tenantSlug={tenantSlug} 
+            tenantBrandColor={tenant.brand_color} 
+            vehicles={vehicles}
+          />
         </VehicleProvider>  
       </div>
     );

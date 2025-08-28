@@ -1,4 +1,3 @@
-
 import { apiClient } from '@/lib/api';
 import { API_ENDPOINTS } from '@/config/api';
 import { ApiResponse} from '@/types/api.types';
@@ -41,24 +40,40 @@ export const tenantService = {
     return response.data;
   },
 
-  /*async getTenantVehicles(slug: string): Promise<Vehicle[]> {
-    const response = await apiClient.get<ApiResponse<Vehicle[]>>(
+  /**
+   * Get tenant vehicles (all vehicles)
+   */
+  async getTenantVehicles(slug: string): Promise<Vehicle[]> {
+    const response = await apiClient.get<Vehicle[]>(
       API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
     );
     
-    if (!response.success) {
-      throw new Error(response.error || 'Failed to fetch tenant vehicles');
+    // Since the API returns the array directly, just return it
+    return response;
+  },
+
+  /**
+   * Get tenant vehicles with availability filtering
+   */
+  async getTenantVehiclesAvailability(
+    slug: string, 
+    startDate?: string, 
+    endDate?: string
+  ): Promise<Vehicle[]> {
+    const params = new URLSearchParams();
+    
+    if (startDate) {
+      params.append('start_date', startDate);
     }
     
-    return response.data;
-  },*/
+    if (endDate) {
+      params.append('end_date', endDate);
+    }
 
-    async getTenantVehicles(slug: string): Promise<Vehicle[]> {
-    const response = await apiClient.get<Vehicle[]>(
-    API_ENDPOINTS.TENANT.GET_VEHICLES(slug)
-  );
-  
-  // Since the API returns the array directly, just return it
-  return response;
+    const url = `${API_ENDPOINTS.TENANT.GET_VEHICLES_AVAILABILITY(slug)}${params.toString() ? `?${params.toString()}` : ''}`;
+    
+    const response = await apiClient.get<Vehicle[]>(url);
+    
+    return response;
   },
 };

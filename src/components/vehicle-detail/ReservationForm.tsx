@@ -112,7 +112,7 @@ export function ReservationForm({
         requested_end_date: endDate,
         customer_notes: customerNotes.trim() || undefined,
       };
-
+      console.log("request body", requestBody);
       const response = await fetch(`${baseUrl}/api/bookings`, {
         method: 'POST',
         headers: {

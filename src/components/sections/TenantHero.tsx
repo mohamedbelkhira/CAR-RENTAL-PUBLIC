@@ -194,7 +194,7 @@ export function TenantHero({ tenant }: TenantHeroProps) {
     </div>
   </div>
 )}
-                  
+                
                   {/* Operating Hours */}
                   <div className="flex items-start gap-3 group">
                     <div 
