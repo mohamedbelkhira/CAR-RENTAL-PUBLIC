@@ -83,16 +83,18 @@ export function VehicleDetailPage({
                       {capitalize(vehicle.category)} • Disponible à la location
                     </CardDescription>
                   </div>
-                  <div className="text-right">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold" style={{ color: tenantBrandColor }}>
-                        {formatPrice(vehicle.daily_rate)}
-                      </span>
-                      <span className="text-lg text-slate-600">DA</span>
+                  {vehicle.daily_rate && (
+                    <div className="text-right">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-4xl font-bold" style={{ color: tenantBrandColor }}>
+                          {formatPrice(vehicle.daily_rate)}
+                        </span>
+                        <span className="text-lg text-slate-600">DA</span>
+                      </div>
+                      <p className="text-slate-500 text-sm">par jour</p>
                     </div>
-                    <p className="text-slate-500 text-sm">par jour</p>
+                  )}
                   </div>
-                </div>
               </CardHeader>
             </Card>
 

@@ -112,6 +112,7 @@ const imageUrl = primaryImage ? `${baseUrl}/storage/${primaryImage.image_path}` 
               Véhicule de location
             </p>
           </div>
+         {vehicle.daily_rate && (
           <div className="text-right space-y-1">
             <div className="flex items-baseline space-x-1">
               <span 
@@ -124,6 +125,7 @@ const imageUrl = primaryImage ? `${baseUrl}/storage/${primaryImage.image_path}` 
             </div>
             <p className="text-xs text-slate-500 font-medium">par jour</p>
           </div>
+        )}
         </div>
 
         <Separator className="bg-slate-200" />
